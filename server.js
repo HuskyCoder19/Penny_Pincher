@@ -21,10 +21,10 @@ const db = new sqlite3.Database('./database/expense.db', sqlite3.OPEN_READWRITE,
 app.use(cors())
 app.use(bodyParser.json())
 
-// add expenses query
-app.post('/api/users', (req, res) => {
+// expense db insertion
+app.post('/exp', (req, res) => {
   const { user_id, purchase, amount, importance, date } = req.body
-  const sql = `INSERT INTO expenses (user_id, purchase, amount, imoprtance, date) VALUES (?, ?, ?, ?, ?)`
+  const sql = `INSERT INTO expenses (user_id, purchase, amount, importance, date) VALUES (?, ?, ?, ?, ?)`
   db.run(sql, [user_id, purchase, amount, importance, date], function(err) {
     if (err) {
       console.error(err.message)
